@@ -1,1 +1,1 @@
-module.exports = test => test.replace(/^test/, 'lib')
+module.exports = test => !test.startsWith('test') ? undefined : test.replace(/^test/, 'lib')

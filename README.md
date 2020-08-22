@@ -86,10 +86,9 @@ arb.buildIdealTree(options).then(() => {
   //   - prod: definitely in 'dependencies'
   //   - optional: in 'optionalDependencies'
   //   - dev: devDependencies
-  //   - peer: save in peerDependencies, and remove any optional flag from
-  //     peerDependenciesMeta if one exists
-  //   - peerOptional: save in peerDependencies, and add a
-  //     peerDepsMeta[name].optional flag
+  //     REVIEW: peerOverride: peerDependenciesMeta isn't being manipulated anymore
+  //     NOTE: there is no separate saveType for Overrides as of now
+  //   - peer: save in peerDependencies
   // saveBundle: add newly added deps to the bundleDependencies list
   // update: Either `true` to just go ahead and update everything, or an
   //   object with any or all of the following fields:
@@ -241,7 +240,7 @@ location.
   is supported.
 * `edge.to` Automatically set to the node in the tree that matches the
   `name` field.
-* `edge.valid` True if `edge.to` satisfies the specifier.
+* `edge.valid` True if `edge.to` satisfiesthe specifier.
 * `edge.error` A string indicating the type of error if there is a problem,
   or `null` if it's valid.  Values, in order of precedence:
     * `DETACHED` Indicates that the edge has been detached from its
@@ -264,6 +263,8 @@ the `dev`, `optional`, and `devOptional` flags on the node object.  These
 are updated by arborist when necessary whenever the tree is modified in
 such a way that the dependency graph can change, and are relevant when
 pruning nodes from the tree.
+
+REVIEW: peerOverride removed `peerOptional`-mention from row<peer: true, optional: true>
 
 ```
 | extraneous | peer | dev | optional | devOptional | meaning             | prune?            |
@@ -299,8 +300,7 @@ pruning nodes from the tree.
 |            |      |     |          | not in lock | dev node hierarchy  | OR dev deps       |
 |------------+------+-----+----------+-------------+---------------------+-------------------|
 |            |  X   |     |    X     |      X      | peer dependency of  | if pruning peer   |
-|            |      |     |          | not in lock | optional nodes, or  | OR optional deps  |
-|            |      |     |          |             | peerOptional dep    |                   |
+|            |      |     |          | not in lock | optional nodes      | OR optional deps  |
 |------------+------+-----+----------+-------------+---------------------+-------------------|
 |            |  X   |  X  |    X     |      X      | peer optional deps  | if pruning peer   |
 |            |      |     |          | not in lock | of the dev dep      | OR optional OR    |

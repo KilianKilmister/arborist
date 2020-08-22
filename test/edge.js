@@ -332,17 +332,18 @@ t.test('convenience type getter flags', async t => {
     spec: '*',
   }).optional, true, 'optional convenience getter')
 
+  // REVIEW: peerOverride: changed from `peerOptional` to `peerOverride`
   t.equal(new Edge({
     from: a,
-    type: 'peerOptional',
+    type: 'peerOverride',
     name: 'foo',
     spec: '*',
-  }).peer, true, 'peer convenience getter for peerOptional edge')
+  }).peer, true, 'peer convenience getter for peerOverride edge')
 
   t.equal(new Edge({
     from: a,
-    type: 'peerOptional',
+    type: 'peerOverride',
     name: 'foo',
     spec: '*',
-  }).optional, true, 'optional convenience getter for peerOptional edge')
+  }).override, true, 'override convenience getter for peerOverride edge')
 })

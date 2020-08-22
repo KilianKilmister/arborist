@@ -138,10 +138,11 @@ hierarchical tree structure.  (That is, there can be cycles.)
 An `Edge` represents a particular _dependency_ relationship, regardless of
 the location on disk of the nodes in that relationship.
 
+REVIEW: peerOverride: changed `peerOptional` to `peerOverride`
 Each edge has `from` and `to` fields referring to the nodes in question.
 `from` is the node with the dependency, and `to` is node that satisfies the
 dependency (or `null` if it's missing).  Each edge also has a `type`, which
-can be one of `prod`, `dev`, `optional`, `peer`, or `peerOptional`.
+can be one of `prod`, `dev`, `optional`, `peer`, or `peerOverride`.
 
 The `edgesOut` property is a map of names to edge objects representing all
 the dependencies of a given node.  The `edgesIn` property is the set of all

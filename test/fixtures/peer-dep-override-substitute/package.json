@@ -1,0 +1,13 @@
+{
+  "name": "peer-dep-override-substitute",
+  "version": "1.0.0",
+  "description": "test full substitution of a peer-dep",
+  "dependencies": {
+    "@isaacs/testing-peer-deps-b": "1"
+  },
+  "peerDependenciesMeta": {
+    "@isaacs/testing-peer-deps-b": {
+      "@isaacs/testing-peer-deps-c": { "@isaacs/testing-peer-deps-a": "2" }
+    }
+  }
+}

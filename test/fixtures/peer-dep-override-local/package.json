@@ -1,0 +1,14 @@
+{
+  "name": "peer-dep-override-local",
+  "version": "1.0.0",
+  "description": "test resolving `local` version specifier in peer-override",
+  "dependencies": {
+    "@isaacs/testing-peer-deps-b": "1",
+    "@isaacs/testing-peer-deps-c": "2"
+  },
+  "peerDependenciesMeta": {
+    "@isaacs/testing-peer-deps-b": {
+      "@isaacs/testing-peer-deps-c": "local"
+    }
+  }
+}

@@ -66,50 +66,52 @@ t.test('add', t => {
     bundleDependencies: ['bar', 'foo'],
   }, 'add all new stuff')
 
-  t.strictSame(add({
-    pkg: {
-      peerDependencies: { foo: '1' },
-      peerDependenciesMeta: { foo: { optional: true }},
-    },
-    add: [ foo1 ],
-    saveType: 'optional',
-  }), {
-    optionalDependencies: { foo: '1' },
-  }, 'move from peerOptional to optional')
-
-  t.strictSame(add({
-    pkg: {
-      optionalDependencies: { foo: '1' },
-    },
-    add: [ foo1 ],
-    saveType: 'peerOptional',
-  }), {
-    peerDependencies: { foo: '1' },
-    peerDependenciesMeta: { foo: { optional: true }},
-  }, 'move from optional to peerOptional')
-
-  t.strictSame(add({
-    pkg: {
-      peerDependencies: { foo: '1' },
-      peerDependenciesMeta: { foo: { optional: true }},
-    },
-    add: [ foo1 ],
-    saveType: 'peer',
-  }), {
-    peerDependencies: { foo: '1' },
-    peerDependenciesMeta: { foo: { optional: false }},
-  }, 'move from peerOptional to peer')
-
-  t.strictSame(add({
-    pkg: {
-      peerDependencies: { foo: '1' },
-      peerDependenciesMeta: { foo: { optional: true }},
-    },
-    add: [ foo2 ],
-  }), {
-    peerDependencies: { foo: '2' },
-    peerDependenciesMeta: { foo: { optional: true }},
-  }, 'update peerOptional')
+  // REVIEW: peerOverride: does not apply anymore
+  // TODO: write test for peerOverride
+  // t.strictSame(add({
+  //   pkg: {
+  //     peerDependencies: { foo: '1' },
+  //     peerDependenciesMeta: { foo: { optional: true }},
+  //   },
+  //   add: [ foo1 ],
+  //   saveType: 'optional',
+  // }), {
+  //   optionalDependencies: { foo: '1' },
+  // }, 'move from peerOptional to optional')
+  //
+  // t.strictSame(add({
+  //   pkg: {
+  //     optionalDependencies: { foo: '1' },
+  //   },
+  //   add: [ foo1 ],
+  //   saveType: 'peerOptional',
+  // }), {
+  //   peerDependencies: { foo: '1' },
+  //   peerDependenciesMeta: { foo: { optional: true }},
+  // }, 'move from optional to peerOptional')
+  //
+  // t.strictSame(add({
+  //   pkg: {
+  //     peerDependencies: { foo: '1' },
+  //     peerDependenciesMeta: { foo: { optional: true }},
+  //   },
+  //   add: [ foo1 ],
+  //   saveType: 'peer',
+  // }), {
+  //   peerDependencies: { foo: '1' },
+  //   peerDependenciesMeta: { foo: { optional: false }},
+  // }, 'move from peerOptional to peer')
+  //
+  // t.strictSame(add({
+  //   pkg: {
+  //     peerDependencies: { foo: '1' },
+  //     peerDependenciesMeta: { foo: { optional: true }},
+  //   },
+  //   add: [ foo2 ],
+  // }), {
+  //   peerDependencies: { foo: '2' },
+  //   peerDependenciesMeta: { foo: { optional: true }},
+  // }, 'update peerOptional')
 
   t.strictSame(add({
     pkg: {
