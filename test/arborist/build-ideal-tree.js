@@ -206,6 +206,144 @@ t.test('nested cyclical peer deps', t => {
     resolve(fixtures, 'peer-dep-cycle-nested'),
     resolve(fixtures, 'peer-dep-cycle-nested-with-sw'),
   ]
+
+  // if we have a shrinkwrap, then we'll get a collision with the current
+  // version already there.  if we don't, then we'll get a peerConflict
+  // when we try to put the second one there.
+  const ers = {
+    [paths[0]]: {
+      code: 'ERESOLVE',
+      dep: {
+        name: '@isaacs/peer-dep-cycle-b',
+        version: '1.0.0',
+        whileInstalling: { name: '@isaacs/peer-dep-cycle-a', version: '1.0.0' },
+        location: 'node_modules/@isaacs/peer-dep-cycle-b',
+        dependents: [
+          {
+            type: 'peer',
+            spec: '1',
+            from: {
+              name: '@isaacs/peer-dep-cycle-a',
+              version: '1.0.0',
+              location: 'node_modules/@isaacs/peer-dep-cycle-a',
+              dependents: [
+                {
+                  type: 'prod',
+                  spec: '1.x',
+                  from: { location: paths[0] },
+                }
+              ]
+            }
+          }
+        ]
+      },
+      current: {
+        name: '@isaacs/peer-dep-cycle-c',
+        version: '2.0.0',
+        location: 'node_modules/@isaacs/peer-dep-cycle-c',
+        dependents: [
+          {
+            type: 'prod',
+            spec: '2.x',
+            from: { location: paths[0] },
+          }
+        ]
+      },
+      peerConflict: {
+        name: '@isaacs/peer-dep-cycle-c',
+        version: '1.0.0',
+        whileInstalling: { name: '@isaacs/peer-dep-cycle-a', version: '1.0.0' },
+        location: 'node_modules/@isaacs/peer-dep-cycle-c',
+        dependents: [
+          {
+            type: 'peer',
+            spec: '1',
+            from: {
+              name: '@isaacs/peer-dep-cycle-b',
+              version: '1.0.0',
+              whileInstalling: { name: '@isaacs/peer-dep-cycle-a', version: '1.0.0' },
+              location: 'node_modules/@isaacs/peer-dep-cycle-b',
+              dependents: [
+                {
+                  type: 'peer',
+                  spec: '1',
+                  from: {
+                    name: '@isaacs/peer-dep-cycle-a',
+                    version: '1.0.0',
+                    location: 'node_modules/@isaacs/peer-dep-cycle-a',
+                    dependents: [
+                      {
+                        type: 'prod',
+                        spec: '1.x',
+                        from: { location: paths[0] },
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      fixWithForce: false,
+      type: 'peer',
+      isPeer: true,
+    },
+    [paths[1]]: {
+      code: 'ERESOLVE',
+      dep: {
+        name: '@isaacs/peer-dep-cycle-c',
+        version: '1.0.0',
+        whileInstalling: { name: '@isaacs/peer-dep-cycle-b', version: '1.0.0' },
+        location: 'node_modules/@isaacs/peer-dep-cycle-c',
+        dependents: [
+          {
+            type: 'peer',
+            spec: '1',
+            error: 'INVALID',
+            from: {
+              name: '@isaacs/peer-dep-cycle-b',
+              version: '1.0.0',
+              location: 'node_modules/@isaacs/peer-dep-cycle-b',
+              dependents: [
+                {
+                  type: 'peer',
+                  spec: '1',
+                  from: {
+                    name: '@isaacs/peer-dep-cycle-a',
+                    version: '1.0.0',
+                    location: 'node_modules/@isaacs/peer-dep-cycle-a',
+                    dependents: [
+                      {
+                        type: 'prod',
+                        spec: '1.x',
+                        from: { location: paths[1] },
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      current: {
+        name: '@isaacs/peer-dep-cycle-c',
+        version: '2.0.0',
+        location: 'node_modules/@isaacs/peer-dep-cycle-c',
+        dependents: [
+          {
+            type: 'prod',
+            spec: '2.x',
+            from: { location: paths[1] },
+          }
+        ]
+      },
+      fixWithForce: true,
+      type: 'peer',
+    },
+  }
+
   t.plan(paths.length)
   paths.forEach(path => t.test(basename(path), t =>
     t.resolveMatchSnapshot(printIdeal(path), 'nested peer deps cycle')
@@ -227,7 +365,7 @@ t.test('nested cyclical peer deps', t => {
           '@isaacs/peer-dep-cycle-a@1.x',
           '@isaacs/peer-dep-cycle-c@2.x',
         ],
-      }), 'try (and fail) to upgrade c and a incompatibly'))
+      }), ers[path], 'try (and fail) to upgrade c and a incompatibly'))
   ))
 })
 
@@ -316,12 +454,50 @@ t.test('bundle deps example 2', t => {
 
 t.test('unresolveable peer deps', t => {
   const path = resolve(fixtures, 'testing-peer-deps-unresolvable')
+
   return t.rejects(printIdeal(path), {
     message: 'unable to resolve dependency tree',
-    package: '@isaacs/testing-peer-deps-c',
-    spec: '2',
+    code: 'ERESOLVE',
+    dep: {
+      name: '@isaacs/testing-peer-deps-c',
+      version: '2.0.0',
+      whileInstalling: { name: '@isaacs/testing-peer-deps-b', version: '2.0.1' },
+      location: 'node_modules/@isaacs/testing-peer-deps-c',
+      dependents: [
+        {
+          type: 'peer',
+          spec: '2',
+          error: 'INVALID',
+          from: {
+            name: '@isaacs/testing-peer-deps-b',
+            version: '2.0.1',
+            location: 'node_modules/@isaacs/testing-peer-deps-b',
+            dependents: [
+              {
+                type: 'prod',
+                spec: '2',
+                from: { location: path },
+              }
+            ]
+          }
+        }
+      ]
+    },
+    current: {
+      name: '@isaacs/testing-peer-deps-c',
+      version: '1.2.3',
+      location: 'node_modules/@isaacs/testing-peer-deps-c',
+      dependents: [
+        {
+          type: 'prod',
+          spec: '1',
+          from: { location: path },
+        }
+      ]
+    },
+    fixWithForce: true,
     type: 'peer',
-    requiredBy: '@isaacs/testing-peer-deps-b@2.0.1',
+    isPeer: true
   }, 'unacceptable')
 })
 
@@ -1086,6 +1262,11 @@ t.test('workspaces', t => {
     return t.resolveMatchSnapshot(printIdeal(path))
   })
 
+  t.test('should update a simple example', t => {
+    const path = resolve(__dirname, '../fixtures/workspaces-simple')
+    return t.resolveMatchSnapshot(printIdeal(path, { update: { all: true }}))
+  })
+
   t.test('should install a simple scoped pkg example', t => {
     const path = resolve(__dirname, '../fixtures/workspaces-scoped-pkg')
     return t.resolveMatchSnapshot(printIdeal(path))
@@ -1172,4 +1353,177 @@ t.test('dont get confused if root matches duped metadep', async t => {
   const arb = new Arborist({ path, ...OPT })
   const tree = await arb.buildIdealTree()
   t.matchSnapshot(printTree(tree))
+})
+
+t.test('inflate an ancient lockfile by hitting the registry', async t => {
+  const checkLogs = warningTracker()
+  const path = resolve(fixtures, 'sax')
+  const arb = new Arborist({ path, ...OPT })
+  const tree = await arb.buildIdealTree()
+  t.matchSnapshot(printTree(tree))
+  t.strictSame(checkLogs(), [
+    [
+      'warn',
+      'ancient lockfile',
+      `
+The package-lock.json file was created with an old version of npm,
+so supplemental metadata must be fetched from the registry.
+
+This is a one-time fix-up, please be patient...
+`,
+    ],
+  ])
+})
+
+t.test('inflate an ancient lockfile with a dep gone missing', async t => {
+  const checkLogs = warningTracker()
+  const path = resolve(fixtures, 'ancient-lockfile-invalid')
+  const arb = new Arborist({ path, ...OPT })
+  const tree = await arb.buildIdealTree()
+  t.matchSnapshot(printTree(tree))
+  t.match(checkLogs(), [
+    [
+      'warn',
+      'ancient lockfile',
+      `
+The package-lock.json file was created with an old version of npm,
+so supplemental metadata must be fetched from the registry.
+
+This is a one-time fix-up, please be patient...
+`,
+    ],
+    [
+      'warn',
+      'ancient lockfile',
+      'Could not fetch metadata for @isaacs/this-does-not-exist-at-all@1.2.3',
+      { code: 'E404', method: 'GET' },
+    ],
+  ])
+})
+
+t.test('complete build for project with old lockfile', async t => {
+  const checkLogs = warningTracker()
+  const path = resolve(fixtures, 'eslintme')
+  const arb = new Arborist({ path, ...OPT })
+  const tree = await arb.buildIdealTree({ complete: true })
+  t.matchSnapshot(printTree(tree))
+  t.match(checkLogs(), [
+    [
+      'warn',
+      'old lockfile',
+      `
+The package-lock.json file was created with an old version of npm,
+so supplemental metadata must be fetched from the registry.
+
+This is a one-time fix-up, please be patient...
+`,
+    ],
+  ])
+})
+
+t.test('override a conflict with the root dep (with force)', async t => {
+  const path = resolve(fixtures, 'testing-peer-dep-conflict-chain/override')
+  await t.rejects(() => buildIdeal(path), {
+    code: 'ERESOLVE',
+    dep: {
+      name: '@isaacs/testing-peer-dep-conflict-chain-a',
+      version: '1.0.0',
+      whileInstalling: {
+        name: '@isaacs/testing-peer-dep-conflict-chain-v',
+        version: '1.0.0'
+      },
+      location: 'node_modules/@isaacs/testing-peer-dep-conflict-chain-a',
+      dependents: [
+        {
+          type: 'peer',
+          spec: '1',
+          error: 'INVALID',
+          from: {
+            name: '@isaacs/testing-peer-dep-conflict-chain-v',
+            version: '1.0.0',
+            location: 'node_modules/@isaacs/testing-peer-dep-conflict-chain-v',
+            dependents: [
+              {
+                type: 'prod',
+                spec: '1',
+                from: { location: path },
+              }
+            ]
+          }
+        }
+      ]
+    },
+    current: {
+      name: '@isaacs/testing-peer-dep-conflict-chain-a',
+      version: '2.0.0',
+      location: 'node_modules/@isaacs/testing-peer-dep-conflict-chain-a',
+      dependents: [
+        {
+          type: 'prod',
+          spec: '2',
+          from: { location: path },
+        }
+      ]
+    },
+    fixWithForce: true,
+    type: 'peer',
+    isPeer: true
+  })
+  t.matchSnapshot(await printIdeal(path, { force: true }), 'force override')
+})
+
+t.test('override a conflict with the root peer dep (with force)', async t => {
+  const path = resolve(fixtures, 'testing-peer-dep-conflict-chain/override-peer')
+  await t.rejects(() => buildIdeal(path), {
+    code: 'ERESOLVE',
+    dep: {
+      name: '@isaacs/testing-peer-dep-conflict-chain-a',
+      version: '1.0.0',
+      whileInstalling: {
+        name: '@isaacs/testing-peer-dep-conflict-chain-v',
+        version: '1.0.0'
+      },
+      location: 'node_modules/@isaacs/testing-peer-dep-conflict-chain-a',
+      dependents: [
+        {
+          type: 'peer',
+          spec: '1',
+          error: 'INVALID',
+          from: {
+            name: '@isaacs/testing-peer-dep-conflict-chain-v',
+            version: '1.0.0',
+            location: 'node_modules/@isaacs/testing-peer-dep-conflict-chain-v',
+            dependents: [
+              {
+                type: 'prod',
+                spec: '1',
+                from: { location: path },
+              }
+            ]
+          }
+        }
+      ]
+    },
+    current: {
+      name: '@isaacs/testing-peer-dep-conflict-chain-a',
+      version: '2.0.0',
+      location: 'node_modules/@isaacs/testing-peer-dep-conflict-chain-a',
+      dependents: [
+        {
+          type: 'peer',
+          spec: '2',
+          from: { location: path },
+        }
+      ]
+    },
+    fixWithForce: true,
+    type: 'peer',
+    isPeer: true
+  })
+  t.matchSnapshot(await printIdeal(path, { force: true }), 'force override')
+})
+
+t.test('push conflicted peer deps deeper in to the tree to solve', async t => {
+  const path = resolve(fixtures, 'testing-peer-dep-conflict-chain/override-dep')
+  t.matchSnapshot(await printIdeal(path))
 })

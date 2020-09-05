@@ -50,6 +50,11 @@ const printTree = tree => ({
     ? {
       errors: tree.errors.map(error => ({
         code: error.code,
+        ...(error.code ? {} : {
+          code: 'no code, wtf???',
+          message: error.message,
+          stack: ('' + error.stack).split('\n'),
+        }),
         ...(error.path ? { path: relative(__dirname, error.path) }
           : {}),
       })),
@@ -90,6 +95,9 @@ const printTree = tree => ({
     meta: JSON.parse(stringify(tree.meta.commit())),
   })
 })
+
+const cwd = process.cwd()
+t.cleanSnapshot = s => s.split(cwd).join('{CWD}')
 
 t.formatSnapshot = tree => format(printTree(tree), { sort: true })
 
@@ -276,5 +284,14 @@ t.test('realpath gutchecks', t => {
       real => t.equal(real, realpathSync(resolve(d, link))),
       er => t.throws(()=> realpathSync(resolve(d, link)))
     )))
+  t.end()
+})
+
+t.test('workspaces', t => {
+  t.test('load a simple install tree containing workspaces', t =>
+    t.resolveMatchSnapshot(
+      loadActual(resolve(fixtures, 'workspaces-simple'))
+    ))
+
   t.end()
 })

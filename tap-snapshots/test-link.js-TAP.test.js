@@ -55,6 +55,7 @@ exports[`test/link.js TAP > instantiate with target specified 1`] = `
         "indent": 2,
         "loadedFromDisk": false,
         "loadingError": null,
+        "newline": "\\n",
         "path": "/home/user/projects/some/kind/of/path",
         "shrinkwrapOnly": false,
         "tree": <*ref_2>,
@@ -67,6 +68,7 @@ exports[`test/link.js TAP > instantiate with target specified 1`] = `
       "peer": true,
       "realpath": "/home/user/projects/some/kind/of/path",
       "resolved": null,
+      "sourceReference": null,
     },
   },
   "legacyPeerDeps": false,
@@ -78,6 +80,7 @@ exports[`test/link.js TAP > instantiate with target specified 1`] = `
   "path": "/home/user/some/other/path",
   "peer": true,
   "realpath": "/home/user/projects/some/kind/of/path",
+  "sourceReference": null,
 }
 `
 
@@ -132,6 +135,7 @@ exports[`test/link.js TAP > instantiate without providing target 1`] = `
         "indent": 2,
         "loadedFromDisk": false,
         "loadingError": null,
+        "newline": "\\n",
         "path": "/home/user/projects/some/kind/of/path",
         "shrinkwrapOnly": false,
         "tree": <*ref_2>,
@@ -144,6 +148,7 @@ exports[`test/link.js TAP > instantiate without providing target 1`] = `
       "peer": true,
       "realpath": "/home/user/projects/some/kind/of/path",
       "resolved": null,
+      "sourceReference": null,
     },
   },
   "legacyPeerDeps": false,
@@ -169,6 +174,7 @@ exports[`test/link.js TAP > instantiate without providing target 1`] = `
     "indent": 2,
     "loadedFromDisk": false,
     "loadingError": null,
+    "newline": "\\n",
     "path": "/home/user/projects/some/kind/of/path",
     "shrinkwrapOnly": false,
     "tree": Node {
@@ -196,6 +202,7 @@ exports[`test/link.js TAP > instantiate without providing target 1`] = `
       "peer": true,
       "realpath": "/home/user/projects/some/kind/of/path",
       "resolved": null,
+      "sourceReference": null,
     },
     "type": null,
     "yarnLock": null,
@@ -205,5 +212,6 @@ exports[`test/link.js TAP > instantiate without providing target 1`] = `
   "path": "/home/user/some/other/path",
   "peer": true,
   "realpath": "/home/user/projects/some/kind/of/path",
+  "sourceReference": null,
 }
 `
