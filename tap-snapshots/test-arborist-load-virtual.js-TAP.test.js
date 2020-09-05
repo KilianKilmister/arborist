@@ -5,6 +5,833 @@
  * Make sure to inspect the output below.  Do not ignore changes!
  */
 'use strict'
+exports[`test/arborist/load-virtual.js TAP load a tree where package.json edited > changed, but re-using the same root that already has meta 1`] = `
+Node {
+  "children": Map {
+    "abbrev" => Node {
+      "edgesIn": Set {
+        Edge {
+          "from": "",
+          "name": "abbrev",
+          "spec": "^1.1.0",
+          "type": "prod",
+        },
+      },
+      "location": "node_modules/abbrev",
+      "name": "abbrev",
+      "package": Object {
+        "name": "abbrev",
+        "version": "1.1.1",
+      },
+      "resolved": "https://registry.npmjs.org/abbrev/-/abbrev-1.1.1.tgz",
+    },
+    "json-parse-even-better-errors" => Node {
+      "edgesIn": Set {
+        Edge {
+          "from": "",
+          "name": "json-parse-even-better-errors",
+          "spec": "",
+          "type": "optional",
+        },
+      },
+      "location": "node_modules/json-parse-even-better-errors",
+      "name": "json-parse-even-better-errors",
+      "optional": true,
+      "package": Object {
+        "name": "json-parse-even-better-errors",
+        "version": "2.3.1",
+      },
+      "resolved": "https://registry.npmjs.org/json-parse-even-better-errors/-/json-parse-even-better-errors-2.3.1.tgz",
+    },
+    "once" => Node {
+      "edgesIn": Set {
+        Edge {
+          "from": "",
+          "name": "once",
+          "spec": "",
+          "type": "peer",
+        },
+      },
+      "edgesOut": Map {
+        "wrappy" => Edge {
+          "name": "wrappy",
+          "spec": "1",
+          "to": "node_modules/wrappy",
+          "type": "prod",
+        },
+      },
+      "location": "node_modules/once",
+      "name": "once",
+      "package": Object {
+        "name": "once",
+        "version": "1.4.0",
+      },
+      "peer": true,
+      "resolved": "https://registry.npmjs.org/once/-/once-1.4.0.tgz",
+    },
+    "opener" => Node {
+      "dev": true,
+      "edgesIn": Set {
+        Edge {
+          "from": "node_modules/walden",
+          "name": "opener",
+          "spec": "^1.4.2",
+          "type": "prod",
+        },
+      },
+      "location": "node_modules/opener",
+      "name": "opener",
+      "package": Object {
+        "name": "opener",
+        "version": "1.5.2",
+      },
+      "resolved": "https://registry.npmjs.org/opener/-/opener-1.5.2.tgz",
+    },
+    "semver" => Node {
+      "edgesIn": Set {
+        Edge {
+          "from": "",
+          "name": "semver",
+          "spec": "",
+          "type": "peerOptional",
+        },
+      },
+      "location": "node_modules/semver",
+      "name": "semver",
+      "optional": true,
+      "package": Object {
+        "name": "semver",
+        "version": "7.3.2",
+      },
+      "peer": true,
+      "resolved": "https://registry.npmjs.org/semver/-/semver-7.3.2.tgz",
+    },
+    "walden" => Node {
+      "dev": true,
+      "edgesIn": Set {
+        Edge {
+          "from": "",
+          "name": "walden",
+          "spec": "",
+          "type": "dev",
+        },
+      },
+      "edgesOut": Map {
+        "opener" => Edge {
+          "name": "opener",
+          "spec": "^1.4.2",
+          "to": "node_modules/opener",
+          "type": "prod",
+        },
+      },
+      "location": "node_modules/walden",
+      "name": "walden",
+      "package": Object {
+        "name": "walden",
+        "version": "1.0.3",
+      },
+      "resolved": "https://registry.npmjs.org/walden/-/walden-1.0.3.tgz",
+    },
+    "wrappy" => Node {
+      "edgesIn": Set {
+        Edge {
+          "from": "node_modules/once",
+          "name": "wrappy",
+          "spec": "1",
+          "type": "prod",
+        },
+      },
+      "location": "node_modules/wrappy",
+      "name": "wrappy",
+      "package": Object {
+        "name": "wrappy",
+        "version": "1.0.2",
+      },
+      "peer": true,
+      "resolved": "https://registry.npmjs.org/wrappy/-/wrappy-1.0.2.tgz",
+    },
+  },
+  "edgesOut": Map {
+    "abbrev" => Edge {
+      "name": "abbrev",
+      "spec": "^1.1.0",
+      "to": "node_modules/abbrev",
+      "type": "prod",
+    },
+    "json-parse-even-better-errors" => Edge {
+      "name": "json-parse-even-better-errors",
+      "spec": "",
+      "to": "node_modules/json-parse-even-better-errors",
+      "type": "optional",
+    },
+    "once" => Edge {
+      "name": "once",
+      "spec": "",
+      "to": "node_modules/once",
+      "type": "peer",
+    },
+    "semver" => Edge {
+      "name": "semver",
+      "spec": "",
+      "to": "node_modules/semver",
+      "type": "peerOptional",
+    },
+    "walden" => Edge {
+      "name": "walden",
+      "spec": "",
+      "to": "node_modules/walden",
+      "type": "dev",
+    },
+  },
+  "location": "",
+  "name": "changed",
+  "package": Object {
+    "name": "changed",
+    "version": undefined,
+  },
+  "resolved": null,
+}
+`
+
+exports[`test/arborist/load-virtual.js TAP load a tree where package.json edited > deps changed 1`] = `
+Node {
+  "children": Map {
+    "abbrev" => Node {
+      "edgesIn": Set {
+        Edge {
+          "from": "",
+          "name": "abbrev",
+          "spec": "^1.1.0",
+          "type": "prod",
+        },
+      },
+      "location": "node_modules/abbrev",
+      "name": "abbrev",
+      "package": Object {
+        "name": "abbrev",
+        "version": "1.1.1",
+      },
+      "resolved": "https://registry.npmjs.org/abbrev/-/abbrev-1.1.1.tgz",
+    },
+    "json-parse-even-better-errors" => Node {
+      "edgesIn": Set {
+        Edge {
+          "from": "",
+          "name": "json-parse-even-better-errors",
+          "spec": "",
+          "type": "optional",
+        },
+      },
+      "location": "node_modules/json-parse-even-better-errors",
+      "name": "json-parse-even-better-errors",
+      "optional": true,
+      "package": Object {
+        "name": "json-parse-even-better-errors",
+        "version": "2.3.1",
+      },
+      "resolved": "https://registry.npmjs.org/json-parse-even-better-errors/-/json-parse-even-better-errors-2.3.1.tgz",
+    },
+    "once" => Node {
+      "edgesIn": Set {
+        Edge {
+          "from": "",
+          "name": "once",
+          "spec": "",
+          "type": "peer",
+        },
+      },
+      "edgesOut": Map {
+        "wrappy" => Edge {
+          "name": "wrappy",
+          "spec": "1",
+          "to": "node_modules/wrappy",
+          "type": "prod",
+        },
+      },
+      "location": "node_modules/once",
+      "name": "once",
+      "package": Object {
+        "name": "once",
+        "version": "1.4.0",
+      },
+      "peer": true,
+      "resolved": "https://registry.npmjs.org/once/-/once-1.4.0.tgz",
+    },
+    "opener" => Node {
+      "dev": true,
+      "edgesIn": Set {
+        Edge {
+          "from": "node_modules/walden",
+          "name": "opener",
+          "spec": "^1.4.2",
+          "type": "prod",
+        },
+      },
+      "location": "node_modules/opener",
+      "name": "opener",
+      "package": Object {
+        "name": "opener",
+        "version": "1.5.2",
+      },
+      "resolved": "https://registry.npmjs.org/opener/-/opener-1.5.2.tgz",
+    },
+    "semver" => Node {
+      "edgesIn": Set {
+        Edge {
+          "from": "",
+          "name": "semver",
+          "spec": "",
+          "type": "peerOptional",
+        },
+      },
+      "location": "node_modules/semver",
+      "name": "semver",
+      "optional": true,
+      "package": Object {
+        "name": "semver",
+        "version": "7.3.2",
+      },
+      "peer": true,
+      "resolved": "https://registry.npmjs.org/semver/-/semver-7.3.2.tgz",
+    },
+    "walden" => Node {
+      "dev": true,
+      "edgesIn": Set {
+        Edge {
+          "from": "",
+          "name": "walden",
+          "spec": "",
+          "type": "dev",
+        },
+      },
+      "edgesOut": Map {
+        "opener" => Edge {
+          "name": "opener",
+          "spec": "^1.4.2",
+          "to": "node_modules/opener",
+          "type": "prod",
+        },
+      },
+      "location": "node_modules/walden",
+      "name": "walden",
+      "package": Object {
+        "name": "walden",
+        "version": "1.0.3",
+      },
+      "resolved": "https://registry.npmjs.org/walden/-/walden-1.0.3.tgz",
+    },
+    "wrappy" => Node {
+      "edgesIn": Set {
+        Edge {
+          "from": "node_modules/once",
+          "name": "wrappy",
+          "spec": "1",
+          "type": "prod",
+        },
+      },
+      "location": "node_modules/wrappy",
+      "name": "wrappy",
+      "package": Object {
+        "name": "wrappy",
+        "version": "1.0.2",
+      },
+      "peer": true,
+      "resolved": "https://registry.npmjs.org/wrappy/-/wrappy-1.0.2.tgz",
+    },
+  },
+  "edgesOut": Map {
+    "abbrev" => Edge {
+      "name": "abbrev",
+      "spec": "^1.1.0",
+      "to": "node_modules/abbrev",
+      "type": "prod",
+    },
+    "json-parse-even-better-errors" => Edge {
+      "name": "json-parse-even-better-errors",
+      "spec": "",
+      "to": "node_modules/json-parse-even-better-errors",
+      "type": "optional",
+    },
+    "once" => Edge {
+      "name": "once",
+      "spec": "",
+      "to": "node_modules/once",
+      "type": "peer",
+    },
+    "semver" => Edge {
+      "name": "semver",
+      "spec": "",
+      "to": "node_modules/semver",
+      "type": "peerOptional",
+    },
+    "walden" => Edge {
+      "name": "walden",
+      "spec": "",
+      "to": "node_modules/walden",
+      "type": "dev",
+    },
+  },
+  "location": "",
+  "name": "changed",
+  "package": Object {
+    "name": "changed",
+    "version": undefined,
+  },
+  "resolved": null,
+}
+`
+
+exports[`test/arborist/load-virtual.js TAP load a tree where package.json edited > deps match 1`] = `
+Node {
+  "children": Map {
+    "abbrev" => Node {
+      "edgesIn": Set {
+        Edge {
+          "from": "",
+          "name": "abbrev",
+          "spec": "^1.1.1",
+          "type": "prod",
+        },
+      },
+      "location": "node_modules/abbrev",
+      "name": "abbrev",
+      "package": Object {
+        "name": "abbrev",
+        "version": "1.1.1",
+      },
+      "resolved": "https://registry.npmjs.org/abbrev/-/abbrev-1.1.1.tgz",
+    },
+    "json-parse-even-better-errors" => Node {
+      "edgesIn": Set {
+        Edge {
+          "from": "",
+          "name": "json-parse-even-better-errors",
+          "spec": "",
+          "type": "optional",
+        },
+      },
+      "location": "node_modules/json-parse-even-better-errors",
+      "name": "json-parse-even-better-errors",
+      "optional": true,
+      "package": Object {
+        "name": "json-parse-even-better-errors",
+        "version": "2.3.1",
+      },
+      "resolved": "https://registry.npmjs.org/json-parse-even-better-errors/-/json-parse-even-better-errors-2.3.1.tgz",
+    },
+    "once" => Node {
+      "edgesIn": Set {
+        Edge {
+          "from": "",
+          "name": "once",
+          "spec": "",
+          "type": "peer",
+        },
+      },
+      "edgesOut": Map {
+        "wrappy" => Edge {
+          "name": "wrappy",
+          "spec": "1",
+          "to": "node_modules/wrappy",
+          "type": "prod",
+        },
+      },
+      "location": "node_modules/once",
+      "name": "once",
+      "package": Object {
+        "name": "once",
+        "version": "1.4.0",
+      },
+      "peer": true,
+      "resolved": "https://registry.npmjs.org/once/-/once-1.4.0.tgz",
+    },
+    "opener" => Node {
+      "dev": true,
+      "edgesIn": Set {
+        Edge {
+          "from": "node_modules/walden",
+          "name": "opener",
+          "spec": "^1.4.2",
+          "type": "prod",
+        },
+      },
+      "location": "node_modules/opener",
+      "name": "opener",
+      "package": Object {
+        "name": "opener",
+        "version": "1.5.2",
+      },
+      "resolved": "https://registry.npmjs.org/opener/-/opener-1.5.2.tgz",
+    },
+    "semver" => Node {
+      "edgesIn": Set {
+        Edge {
+          "from": "",
+          "name": "semver",
+          "spec": "",
+          "type": "peerOptional",
+        },
+      },
+      "location": "node_modules/semver",
+      "name": "semver",
+      "optional": true,
+      "package": Object {
+        "name": "semver",
+        "version": "7.3.2",
+      },
+      "peer": true,
+      "resolved": "https://registry.npmjs.org/semver/-/semver-7.3.2.tgz",
+    },
+    "walden" => Node {
+      "dev": true,
+      "edgesIn": Set {
+        Edge {
+          "from": "",
+          "name": "walden",
+          "spec": "",
+          "type": "dev",
+        },
+      },
+      "edgesOut": Map {
+        "opener" => Edge {
+          "name": "opener",
+          "spec": "^1.4.2",
+          "to": "node_modules/opener",
+          "type": "prod",
+        },
+      },
+      "location": "node_modules/walden",
+      "name": "walden",
+      "package": Object {
+        "name": "walden",
+        "version": "1.0.3",
+      },
+      "resolved": "https://registry.npmjs.org/walden/-/walden-1.0.3.tgz",
+    },
+    "wrappy" => Node {
+      "edgesIn": Set {
+        Edge {
+          "from": "node_modules/once",
+          "name": "wrappy",
+          "spec": "1",
+          "type": "prod",
+        },
+      },
+      "location": "node_modules/wrappy",
+      "name": "wrappy",
+      "package": Object {
+        "name": "wrappy",
+        "version": "1.0.2",
+      },
+      "peer": true,
+      "resolved": "https://registry.npmjs.org/wrappy/-/wrappy-1.0.2.tgz",
+    },
+  },
+  "edgesOut": Map {
+    "abbrev" => Edge {
+      "name": "abbrev",
+      "spec": "^1.1.1",
+      "to": "node_modules/abbrev",
+      "type": "prod",
+    },
+    "json-parse-even-better-errors" => Edge {
+      "name": "json-parse-even-better-errors",
+      "spec": "",
+      "to": "node_modules/json-parse-even-better-errors",
+      "type": "optional",
+    },
+    "once" => Edge {
+      "name": "once",
+      "spec": "",
+      "to": "node_modules/once",
+      "type": "peer",
+    },
+    "semver" => Edge {
+      "name": "semver",
+      "spec": "",
+      "to": "node_modules/semver",
+      "type": "peerOptional",
+    },
+    "walden" => Edge {
+      "name": "walden",
+      "spec": "",
+      "to": "node_modules/walden",
+      "type": "dev",
+    },
+  },
+  "location": "",
+  "name": "ok",
+  "package": Object {
+    "name": "ok",
+    "version": undefined,
+  },
+  "resolved": null,
+}
+`
+
+exports[`test/arborist/load-virtual.js TAP load a tree where package.json edited > deps removed 1`] = `
+Node {
+  "children": Map {
+    "abbrev" => Node {
+      "extraneous": true,
+      "location": "node_modules/abbrev",
+      "name": "abbrev",
+      "package": Object {
+        "name": "abbrev",
+        "version": "1.1.1",
+      },
+      "resolved": "https://registry.npmjs.org/abbrev/-/abbrev-1.1.1.tgz",
+    },
+    "json-parse-even-better-errors" => Node {
+      "extraneous": true,
+      "location": "node_modules/json-parse-even-better-errors",
+      "name": "json-parse-even-better-errors",
+      "package": Object {
+        "name": "json-parse-even-better-errors",
+        "version": "2.3.1",
+      },
+      "resolved": "https://registry.npmjs.org/json-parse-even-better-errors/-/json-parse-even-better-errors-2.3.1.tgz",
+    },
+    "once" => Node {
+      "edgesOut": Map {
+        "wrappy" => Edge {
+          "name": "wrappy",
+          "spec": "1",
+          "to": "node_modules/wrappy",
+          "type": "prod",
+        },
+      },
+      "extraneous": true,
+      "location": "node_modules/once",
+      "name": "once",
+      "package": Object {
+        "name": "once",
+        "version": "1.4.0",
+      },
+      "resolved": "https://registry.npmjs.org/once/-/once-1.4.0.tgz",
+    },
+    "opener" => Node {
+      "edgesIn": Set {
+        Edge {
+          "from": "node_modules/walden",
+          "name": "opener",
+          "spec": "^1.4.2",
+          "type": "prod",
+        },
+      },
+      "extraneous": true,
+      "location": "node_modules/opener",
+      "name": "opener",
+      "package": Object {
+        "name": "opener",
+        "version": "1.5.2",
+      },
+      "resolved": "https://registry.npmjs.org/opener/-/opener-1.5.2.tgz",
+    },
+    "semver" => Node {
+      "extraneous": true,
+      "location": "node_modules/semver",
+      "name": "semver",
+      "package": Object {
+        "name": "semver",
+        "version": "7.3.2",
+      },
+      "resolved": "https://registry.npmjs.org/semver/-/semver-7.3.2.tgz",
+    },
+    "walden" => Node {
+      "edgesOut": Map {
+        "opener" => Edge {
+          "name": "opener",
+          "spec": "^1.4.2",
+          "to": "node_modules/opener",
+          "type": "prod",
+        },
+      },
+      "extraneous": true,
+      "location": "node_modules/walden",
+      "name": "walden",
+      "package": Object {
+        "name": "walden",
+        "version": "1.0.3",
+      },
+      "resolved": "https://registry.npmjs.org/walden/-/walden-1.0.3.tgz",
+    },
+    "wrappy" => Node {
+      "edgesIn": Set {
+        Edge {
+          "from": "node_modules/once",
+          "name": "wrappy",
+          "spec": "1",
+          "type": "prod",
+        },
+      },
+      "extraneous": true,
+      "location": "node_modules/wrappy",
+      "name": "wrappy",
+      "package": Object {
+        "name": "wrappy",
+        "version": "1.0.2",
+      },
+      "resolved": "https://registry.npmjs.org/wrappy/-/wrappy-1.0.2.tgz",
+    },
+  },
+  "location": "",
+  "name": "removed",
+  "package": Object {
+    "name": "removed",
+    "version": undefined,
+  },
+  "resolved": null,
+}
+`
+
+exports[`test/arborist/load-virtual.js TAP load a tree where package.json edited > ws changed 1`] = `
+Node {
+  "children": Map {
+    "a" => Link {
+      "edgesIn": Set {
+        Edge {
+          "from": "",
+          "name": "a",
+          "spec": "file:{CWD}/test/fixtures/edit-package-json/workspaces-changed/a",
+          "type": "workspace",
+        },
+      },
+      "location": "node_modules/a",
+      "name": "a",
+      "package": Object {
+        "name": "a",
+        "version": "1.0.0",
+      },
+      "resolved": "file:../a",
+      "target": Object {
+        "name": "a",
+        "parent": undefined,
+      },
+    },
+    "b" => Link {
+      "edgesIn": Set {
+        Edge {
+          "from": "a",
+          "name": "b",
+          "spec": "^1.0.0",
+          "type": "prod",
+        },
+      },
+      "location": "node_modules/b",
+      "name": "b",
+      "package": Object {
+        "name": "b",
+        "version": "1.0.0",
+      },
+      "resolved": "file:../b",
+      "target": Object {
+        "name": "b",
+        "parent": undefined,
+      },
+    },
+  },
+  "edgesOut": Map {
+    "a" => Edge {
+      "name": "a",
+      "spec": "file:{CWD}/test/fixtures/edit-package-json/workspaces-changed/a",
+      "to": "node_modules/a",
+      "type": "workspace",
+    },
+    "c" => Edge {
+      "error": "MISSING",
+      "name": "c",
+      "spec": "file:{CWD}/test/fixtures/edit-package-json/workspaces-changed/c",
+      "to": null,
+      "type": "workspace",
+    },
+  },
+  "location": "",
+  "name": "workspaces-changed",
+  "package": Object {
+    "name": "workspace-simple",
+    "version": undefined,
+  },
+  "resolved": null,
+}
+`
+
+exports[`test/arborist/load-virtual.js TAP load a tree where package.json edited > ws match 1`] = `
+Node {
+  "children": Map {
+    "a" => Link {
+      "edgesIn": Set {
+        Edge {
+          "from": "",
+          "name": "a",
+          "spec": "file:{CWD}/test/fixtures/workspaces-simple-virtual/a",
+          "type": "workspace",
+        },
+      },
+      "location": "node_modules/a",
+      "name": "a",
+      "package": Object {
+        "name": "a",
+        "version": "1.0.0",
+      },
+      "resolved": "file:../a",
+      "target": Object {
+        "name": "a",
+        "parent": undefined,
+      },
+    },
+    "b" => Link {
+      "edgesIn": Set {
+        Edge {
+          "from": "",
+          "name": "b",
+          "spec": "file:{CWD}/test/fixtures/workspaces-simple-virtual/b",
+          "type": "workspace",
+        },
+        Edge {
+          "from": "a",
+          "name": "b",
+          "spec": "^1.0.0",
+          "type": "prod",
+        },
+      },
+      "location": "node_modules/b",
+      "name": "b",
+      "package": Object {
+        "name": "b",
+        "version": "1.0.0",
+      },
+      "resolved": "file:../b",
+      "target": Object {
+        "name": "b",
+        "parent": undefined,
+      },
+    },
+  },
+  "edgesOut": Map {
+    "a" => Edge {
+      "name": "a",
+      "spec": "file:{CWD}/test/fixtures/workspaces-simple-virtual/a",
+      "to": "node_modules/a",
+      "type": "workspace",
+    },
+    "b" => Edge {
+      "name": "b",
+      "spec": "file:{CWD}/test/fixtures/workspaces-simple-virtual/b",
+      "to": "node_modules/b",
+      "type": "workspace",
+    },
+  },
+  "location": "",
+  "name": "workspaces-simple-virtual",
+  "package": Object {
+    "name": "workspace-simple",
+    "version": undefined,
+  },
+  "resolved": null,
+}
+`
+
 exports[`test/arborist/load-virtual.js TAP load a tree with a bunch of bundles > virtual tree with multiple bundles 1`] = `
 Node {
   "children": Map {
@@ -10910,6 +11737,14 @@ Node {
         },
       },
       "dev": true,
+      "edgesIn": Set {
+        Edge {
+          "from": "",
+          "name": "tap",
+          "spec": "^14.10.5",
+          "type": "dev",
+        },
+      },
       "edgesOut": Map {
         "@types/react" => Edge {
           "name": "@types/react",
@@ -12698,6 +13533,12 @@ Node {
       "to": "node_modules/abbrev",
       "type": "optional",
     },
+    "tap" => Edge {
+      "name": "tap",
+      "spec": "^14.10.5",
+      "to": "node_modules/tap",
+      "type": "dev",
+    },
   },
   "location": "",
   "name": "two-bundled-deps",
@@ -12773,12 +13614,12 @@ Node {
 }
 `
 
-exports[`test/arborist/load-virtual.js TAP load a tree with an empty dep set and a lockfile > virtual tree with no deps 1`] = `
+exports[`test/arborist/load-virtual.js TAP load a tree with an empty root, no pj, and a lockfile > virtual tree with no deps 1`] = `
 Node {
   "location": "",
-  "name": "empty-with-shrinkwrap",
+  "name": "empty-with-shrinkwrap-no-pj",
   "package": Object {
-    "name": "empty-with-shrinkwrap",
+    "name": "empty-with-shrinkwrap-no-pj",
     "version": undefined,
   },
   "resolved": null,
@@ -12871,6 +13712,14 @@ Node {
     },
     "tcompare" => Node {
       "dev": true,
+      "edgesIn": Set {
+        Edge {
+          "from": "",
+          "name": "tcompare",
+          "spec": "^4.0.1",
+          "type": "dev",
+        },
+      },
       "edgesOut": Map {
         "diff-frag" => Edge {
           "name": "diff-frag",
@@ -12923,6 +13772,12 @@ Node {
       "spec": "^1.4.0",
       "to": "node_modules/once",
       "type": "prod",
+    },
+    "tcompare" => Edge {
+      "name": "tcompare",
+      "spec": "^4.0.1",
+      "to": "node_modules/tcompare",
+      "type": "dev",
     },
   },
   "location": "",
