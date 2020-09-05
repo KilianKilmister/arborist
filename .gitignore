@@ -6,7 +6,11 @@
 .editorconfig
 /*.js
 !map.js
+<<<<<<< Updated upstream
 test/arborist/*/
+=======
+/.history
+>>>>>>> Stashed changes
 
 ### BEGIN IGNORED SYMLINKS ###
 ### this list is generated automatically, do not edit directly
